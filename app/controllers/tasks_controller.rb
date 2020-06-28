@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
       @tasks = Task.all
   end
@@ -45,6 +46,10 @@ class TasksController < ApplicationController
 
     flash[:success] = 'タスクは正常に削除されました'
     redirect_to tasks_url
+  end
+  
+  def set_task
+    @task = Task.find(params[:id])
   end
   
   private
